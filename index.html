@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G3N-R-L MiLLz's MELODIOUS MALEFICARUM v1.3 L</title> <!-- L for Landscape -->
+
+    <!-- Link CSS Variables -->
+    <link rel="stylesheet" href="css/neumorphic-vars.css">
+
+    <!-- Link Main Styles -->
+    <link rel="stylesheet" href="css/neumorphic-style.css">
+
+    <!-- Link Enhanced Styles -->
+    <link rel="stylesheet" href="css/enhanced-styles.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Uncial+Antiqua&family=Chakra+Petch:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Canvas for main visualization (Remains behind frame) -->
+        <canvas id="hypercube-canvas"></canvas>
+
+        <!-- Add landscape-mode class for CSS targeting -->
+        <div class="main-frame landscape-mode">
+
+             <!-- Preset Selector Area (Moved conceptually to top-center via CSS) -->
+            <div class="preset-selector-container" id="preset-area"></div>
+
+            <!-- LEFT SIDEBAR -->
+            <div class="sidebar left-sidebar" id="left-controls">
+                <!--
+                    TODO: JS needed to toggle visibility between input-module and params-effects.
+                    Add class 'show-input' or 'show-params' to sidebar div.
+                -->
+                <div class="sidebar-content show-input"> <!-- Default to showing input -->
+
+                    <!-- Input Module Container (Contains XY or Keyboard) -->
+                    <div class="control-module input-module-container" id="input-container-left" data-active-input="keyboard">
+                        <!-- Swap Button (Will be replaced/enhanced by enhanced-ui.js) -->
+                        <div class="module-swap-controls">
+                             <button id="input-swap-button" class="swap-button" aria-label="Swap Input Method">MODE: KYBD</button>
+                        </div>
+
+                        <!-- XY PAD MODULE (Initially hidden by CSS) -->
+                        <div class="control-module xy-pad-module sub-module" id="xy-pad-module" tabindex="-1">
+                            <div class="module-title">SONIC NEXUS</div>
+                            <div class="xy-pad" id="xy-pad">
+                                <div class="xy-cursor" id="xy-cursor"></div>
+                                <div class="xy-idle-visual">
+                                    <div class="freq-bar"></div> <div class="freq-bar"></div> <div class="freq-bar"></div> <div class="freq-bar"></div> <div class="freq-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KEYBOARD MODULE (Initially visible) -->
+                        <div class="control-module keyboard-module sub-module" id="keyboard-module" tabindex="0">
+                             <div class="module-title">NOTE INPUT // OCTAVE C4-C5</div>
+                             <div class="keyboard" id="keyboard">
+                                 <!-- Keys: Added .key-overlay div -->
+                                 <div class="keyboard-key white" data-note="C4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="C#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="D4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="D#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="E4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="F4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="F#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="G4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="G#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="A4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="A#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="B4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="C5"><div class="key-overlay"></div></div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- PARAMETERS & EFFECTS MODULE -->
+                    <div class="control-module params-effects-module" id="params-effects-left" tabindex="0">
+                         <div class="module-title">PARAMETER MATRIX // EFFECTORS</div>
+                         <div class="sliders-grid">
+                              <!-- Sliders -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-filter">FLT.CUT</label><div class="slider-wrapper"><input type="range" min="20" max="15000" value="1500" step="1" class="styled-slider" id="slider-filter"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-resonance">FLT.RES</label><div class="slider-wrapper"><input type="range" min="0.001" max="30" value="1" step="0.01" class="styled-slider" id="slider-resonance"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-attack">ENV.ATK</label><div class="slider-wrapper"><input type="range" min="0.001" max="3" value="0.05" step="0.001" class="styled-slider" id="slider-attack"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-release">ENV.REL</label><div class="slider-wrapper"><input type="range" min="0.005" max="5" value="0.5" step="0.005" class="styled-slider" id="slider-release"></div></div>
+                         </div>
+                         <div class="toggles-section"><div class="toggles-grid">
+                                <!-- Toggles -->
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-delay"><span class="switch-base"><span class="switch-handle"></span><span class="switch-label-on">ON</span><span class="switch-label-off">OFF</span></span></label><label class="toggle-label" for="toggle-delay">[ DELAY ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-reverb"><span class="switch-base"><span class="switch-handle"></span><span class="switch-label-on">ON</span><span class="switch-label-off">OFF</span></span></label><label class="toggle-label" for="toggle-reverb">[ REVERB ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-glitch"><span class="switch-base"><span class="switch-handle"></span><span class="switch-label-on">ON</span><span class="switch-label-off">OFF</span></span></label><label class="toggle-label" for="toggle-glitch">[ GLITCH ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-arpeggiator"><span class="switch-base"><span class="switch-handle"></span><span class="switch-label-on">ON</span><span class="switch-label-off">OFF</span></span></label><label class="toggle-label" for="toggle-arpeggiator">[ ARP ]</label></div>
+                         </div></div>
+                    </div>
+
+                    <!-- Button to switch view within sidebar -->
+                     <button class="sidebar-view-toggle" onclick="toggleSidebarView('left-controls')">Show Params</button>
+
+                </div> <!-- End .sidebar-content -->
+            </div> <!-- End .left-sidebar -->
+
+            <!-- CENTRAL VISUALIZER AREA -->
+            <div class="visualizer-area">
+                <!-- CRT/Scanline Overlay -->
+                <div class="crt-overlay"></div>
+                <!-- Visualizer XY indicator and Mode Toggle will be added by enhanced-ui.js -->
+                <!-- Content inside this area is mainly the canvas, shown from behind -->
+            </div>
+
+            <!-- RIGHT SIDEBAR (Placeholder Structure) -->
+            <div class="sidebar right-sidebar" id="right-controls">
+                 <div class="sidebar-content show-input"> <!-- Default to showing input -->
+                    <!--
+                        TODO: This section needs duplicated controls with unique IDs
+                              OR a more complex JS solution to manage shared controls.
+                              For now, it's a placeholder visually.
+                    -->
+                    <div class="control-module placeholder-module">
+                        <div class="module-title">RIGHT INPUT (PLACEHOLDER)</div>
+                        <p style="text-align: center; padding: 20px;">Keyboard/XY Controls (Right)</p>
+                    </div>
+                     <div class="control-module placeholder-module params-effects-module">
+                         <div class="module-title">RIGHT PARAMS (PLACEHOLDER)</div>
+                         <p style="text-align: center; padding: 20px;">Slider/Toggle Controls (Right)</p>
+                     </div>
+                     <!-- Button to switch view within sidebar -->
+                     <button class="sidebar-view-toggle" onclick="toggleSidebarView('right-controls')">Show Params</button>
+                 </div> <!-- End .sidebar-content -->
+            </div> <!-- End .right-sidebar -->
+
+        </div> <!-- End .main-frame -->
+    </div> <!-- End .app-container -->
+
+    <!-- Load Core Dependencies -->
+    <script type="module" src="core/GeometryManager.js"></script>
+    <script type="module" src="core/ProjectionManager.js"></script>
+    <script type="module" src="core/ShaderManager.js"></script>
+    <script type="module" src="core/HypercubeCore.js"></script>
+
+    <!-- Load Sound Module -->
+    <script type="module" src="sound/sound-module.js"></script>
+
+    <!-- Load CORE UI Interaction Logic -->
+    <script type="module" src="js/ui-interactions.js"></script>
+
+    <!-- Load ENHANCED UI -->
+    <script type="module" src="js/enhanced-ui.js"></script>
+
+    <!-- Simple inline script for sidebar toggle demo (replace with proper JS module later) -->
+    <script>
+        function toggleSidebarView(sidebarId) {
+            const sidebarContent = document.querySelector(`#${sidebarId} .sidebar-content`);
+            const button = document.querySelector(`#${sidebarId} .sidebar-view-toggle`);
+            if (sidebarContent && button) {
+                const showingInput = sidebarContent.classList.toggle('show-input');
+                sidebarContent.classList.toggle('show-params', !showingInput);
+                button.textContent = showingInput ? 'Show Params' : 'Show Input';
+            }
+        }
+         // TODO: Move this logic into ui-interactions.js or enhanced-ui.js
+    </script>
+</body>
+</html>

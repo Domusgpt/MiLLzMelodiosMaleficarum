@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G3N-R-L MiLLz's MELODIOUS MALEFICARUM v1.4 - Phase 2</title>
+
+    <link rel="stylesheet" href="css/neumorphic-vars.css">
+    <link rel="stylesheet" href="css/neumorphic-style.css">
+    <link rel="stylesheet" href="css/enhanced-styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Uncial+Antiqua&family=Chakra+Petch:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <canvas id="hypercube-canvas"></canvas>
+
+        <div class="main-frame landscape-mode">
+
+            <div class="preset-selector-container" id="preset-area"></div>
+
+            <!-- LEFT SIDEBAR -->
+            <div class="sidebar left-sidebar" id="left-controls">
+                <div class="sidebar-content show-input">
+
+                    <div class="control-module input-module-container" id="input-container-left" data-active-input="keyboard">
+                        <div class="module-swap-controls">
+                             <button id="input-swap-button-left" class="swap-button">MODE: KYBD</button> <!-- ID with suffix -->
+                        </div>
+                        <div class="control-module xy-pad-module sub-module" id="xy-pad-module-left" tabindex="-1"> <!-- ID with suffix -->
+                            <div class="module-title">SONIC NEXUS (L)</div>
+                            <div class="xy-pad" id="xy-pad-left"> <!-- ID with suffix -->
+                                <div class="xy-cursor" id="xy-cursor-left"></div> <!-- ID with suffix -->
+                                <div class="xy-idle-visual">
+                                    <div class="freq-bar"></div> <div class="freq-bar"></div> <div class="freq-bar"></div> <div class="freq-bar"></div> <div class="freq-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-module keyboard-module sub-module" id="keyboard-module-left" tabindex="0"> <!-- ID with suffix -->
+                             <div class="module-title">NOTE INPUT (L) // C4-C5</div>
+                             <div class="keyboard" id="keyboard-left"> <!-- ID with suffix -->
+                                 <!-- Keys: C4 to C5 -->
+                                 <div class="keyboard-key white" data-note="C4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="C#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="D4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="D#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="E4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="F4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="F#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="G4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="G#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="A4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key black" data-note="A#4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="B4"><div class="key-overlay"></div></div>
+                                 <div class="keyboard-key white" data-note="C5"><div class="key-overlay"></div></div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="control-module params-effects-module" id="params-effects-left" tabindex="0">
+                         <div class="module-title">PARAMS // FX (L)</div>
+                         <div class="sliders-grid">
+                             <!-- Filter -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-filter-frequency-left">FLT.CUT</label><div class="slider-wrapper"><input type="range" min="20" max="15000" value="1500" step="1" class="styled-slider" id="slider-filter-frequency-left"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-resonance-left">FLT.RES</label><div class="slider-wrapper"><input type="range" min="0.001" max="30" value="1" step="0.01" class="styled-slider" id="slider-resonance-left"></div></div>
+                             <!-- Amp Env -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-attack-left">AMP.ATK</label><div class="slider-wrapper"><input type="range" min="0.001" max="5" value="0.05" step="0.001" class="styled-slider" id="slider-attack-left"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-release-left">AMP.REL</label><div class="slider-wrapper"><input type="range" min="0.005" max="10" value="0.5" step="0.005" class="styled-slider" id="slider-release-left"></div></div>
+                             <!-- Osc 2 -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-osc2-mix-left">OSC2 MIX</label><div class="slider-wrapper"><input type="range" min="0" max="1" value="0" step="0.01" class="styled-slider" id="slider-osc2-mix-left"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-osc2-detune-left">OSC2 DET</label><div class="slider-wrapper"><input type="range" min="-1200" max="1200" value="0" step="1" class="styled-slider" id="slider-osc2-detune-left"></div></div>
+                             <!-- LFO 1 -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-lfo1-rate-left">LFO1 RTE</label><div class="slider-wrapper"><input type="range" min="0.01" max="30" value="1" step="0.01" class="styled-slider" id="slider-lfo1-rate-left"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-lfo1-depth-left">LFO1 DEP</label><div class="slider-wrapper"><input type="range" min="0" max="1" value="0" step="0.01" class="styled-slider" id="slider-lfo1-depth-left"></div></div>
+                             <!-- Noise -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-noise-level-left">NOISE</label><div class="slider-wrapper"><input type="range" min="0" max="1" value="0" step="0.01" class="styled-slider" id="slider-noise-level-left"></div></div>
+                             <!-- Modulation Amounts -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-filter-env-amount-left">FILT ENV</label><div class="slider-wrapper"><input type="range" min="-10000" max="10000" value="0" step="10" class="styled-slider" id="slider-filter-env-amount-left"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-lfo1-filter-mod-left">LFO&gt;FILT</label><div class="slider-wrapper"><input type="range" min="0" max="10000" value="0" step="10" class="styled-slider" id="slider-lfo1-filter-mod-left"></div></div>
+                              <!-- Voice Manager -->
+                             <div class="slider-unit"><label class="slider-label" for="slider-portamento-left">GLIDE</label><div class="slider-wrapper"><input type="range" min="0" max="5" value="0" step="0.01" class="styled-slider" id="slider-portamento-left"></div></div>
+                             <div class="slider-unit"><label class="slider-label" for="slider-unison-detune-left">UNI DET</label><div class="slider-wrapper"><input type="range" min="0" max="100" value="10" step="1" class="styled-slider" id="slider-unison-detune-left"></div></div>
+                         </div>
+                         <div class="toggles-section"><div class="toggles-grid">
+                                <!-- Toggles -->
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-delay-left"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-delay-left">[ DELAY ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-reverb-left"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-reverb-left">[ REVERB ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-glitch-left"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-glitch-left">[ GLITCH ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-arpeggiator-left"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-arpeggiator-left">[ ARP ]</label></div>
+                         </div></div>
+                    </div>
+
+                     <button class="sidebar-view-toggle">Show Params</button> <!-- JS will add data-target -->
+
+                </div> <!-- End .sidebar-content -->
+            </div> <!-- End .left-sidebar -->
+
+            <!-- CENTRAL VISUALIZER AREA -->
+            <div class="visualizer-area">
+                <div class="crt-overlay"></div>
+                <!-- Indicator and toggle added by enhanced-ui.js -->
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="sidebar right-sidebar" id="right-controls">
+                 <div class="sidebar-content show-input">
+                    <div class="control-module input-module-container" id="input-container-right" data-active-input="keyboard">
+                        <div class="module-swap-controls">
+                             <button id="input-swap-button-right" class="swap-button">MODE: KYBD</button> <!-- ID with suffix -->
+                        </div>
+                        <div class="control-module xy-pad-module sub-module" id="xy-pad-module-right" tabindex="-1"> <!-- ID with suffix -->
+                            <div class="module-title">SONIC NEXUS (R)</div>
+                            <div class="xy-pad" id="xy-pad-right"> <!-- ID with suffix -->
+                                <div class="xy-cursor" id="xy-cursor-right"></div> <!-- ID with suffix -->
+                                <div class="xy-idle-visual"> /* ... bars ... */ </div>
+                            </div>
+                        </div>
+                        <div class="control-module keyboard-module sub-module" id="keyboard-module-right" tabindex="0"> <!-- ID with suffix -->
+                             <div class="module-title">NOTE INPUT (R) // C3-C4</div>
+                             <div class="keyboard" id="keyboard-right"> <!-- ID with suffix -->
+                                 <!-- Keys: C3 to C4 -->
+                                  <div class="keyboard-key white" data-note="C3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key black" data-note="C#3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="D3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key black" data-note="D#3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="E3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="F3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key black" data-note="F#3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="G3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key black" data-note="G#3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="A3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key black" data-note="A#3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="B3"><div class="key-overlay"></div></div>
+                                  <div class="keyboard-key white" data-note="C4"><div class="key-overlay"></div></div>
+                             </div>
+                        </div>
+                    </div>
+                     <div class="control-module params-effects-module" id="params-effects-right" tabindex="0">
+                         <div class="module-title">PARAMS // FX (R)</div>
+                         <div class="sliders-grid">
+                              <!-- DUPLICATE SLIDERS FROM LEFT SIDEBAR HERE -->
+                              <!-- Change ALL IDs to end in "-right" -->
+                              <div class="slider-unit"><label class="slider-label" for="slider-filter-frequency-right">FLT.CUT</label><div class="slider-wrapper"><input type="range" min="20" max="15000" value="1500" step="1" class="styled-slider" id="slider-filter-frequency-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-resonance-right">FLT.RES</label><div class="slider-wrapper"><input type="range" min="0.001" max="30" value="1" step="0.01" class="styled-slider" id="slider-resonance-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-attack-right">AMP.ATK</label><div class="slider-wrapper"><input type="range" min="0.001" max="5" value="0.05" step="0.001" class="styled-slider" id="slider-attack-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-release-right">AMP.REL</label><div class="slider-wrapper"><input type="range" min="0.005" max="10" value="0.5" step="0.005" class="styled-slider" id="slider-release-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-osc2-mix-right">OSC2 MIX</label><div class="slider-wrapper"><input type="range" min="0" max="1" value="0" step="0.01" class="styled-slider" id="slider-osc2-mix-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-osc2-detune-right">OSC2 DET</label><div class="slider-wrapper"><input type="range" min="-1200" max="1200" value="0" step="1" class="styled-slider" id="slider-osc2-detune-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-lfo1-rate-right">LFO1 RTE</label><div class="slider-wrapper"><input type="range" min="0.01" max="30" value="1" step="0.01" class="styled-slider" id="slider-lfo1-rate-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-lfo1-depth-right">LFO1 DEP</label><div class="slider-wrapper"><input type="range" min="0" max="1" value="0" step="0.01" class="styled-slider" id="slider-lfo1-depth-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-noise-level-right">NOISE</label><div class="slider-wrapper"><input type="range" min="0" max="1" value="0" step="0.01" class="styled-slider" id="slider-noise-level-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-filter-env-amount-right">FILT ENV</label><div class="slider-wrapper"><input type="range" min="-10000" max="10000" value="0" step="10" class="styled-slider" id="slider-filter-env-amount-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-lfo1-filter-mod-right">LFO&gt;FILT</label><div class="slider-wrapper"><input type="range" min="0" max="10000" value="0" step="10" class="styled-slider" id="slider-lfo1-filter-mod-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-portamento-right">GLIDE</label><div class="slider-wrapper"><input type="range" min="0" max="5" value="0" step="0.01" class="styled-slider" id="slider-portamento-right"></div></div>
+                              <div class="slider-unit"><label class="slider-label" for="slider-unison-detune-right">UNI DET</label><div class="slider-wrapper"><input type="range" min="0" max="100" value="10" step="1" class="styled-slider" id="slider-unison-detune-right"></div></div>
+                         </div>
+                         <div class="toggles-section"><div class="toggles-grid">
+                                <!-- DUPLICATE TOGGLES FROM LEFT SIDEBAR HERE -->
+                                <!-- Change ALL IDs to end in "-right" -->
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-delay-right"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-delay-right">[ DELAY ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-reverb-right"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-reverb-right">[ REVERB ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-glitch-right"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-glitch-right">[ GLITCH ]</label></div>
+                                <div class="toggle-unit"><label class="toggle-switch"><input type="checkbox" id="toggle-arpeggiator-right"><span class="switch-base"><span class="switch-handle"></span></span></label><label class="toggle-label" for="toggle-arpeggiator-right">[ ARP ]</label></div>
+                         </div></div>
+                     </div>
+                     <button class="sidebar-view-toggle">Show Params</button> <!-- JS will add data-target -->
+                 </div> <!-- End .sidebar-content -->
+            </div> <!-- End .right-sidebar -->
+
+        </div> <!-- End .main-frame -->
+    </div> <!-- End .app-container -->
+
+    <!-- Load Core Dependencies (Assuming these exist and are correct) -->
+    <script type="module" src="core/GeometryManager.js"></script>
+    <script type="module" src="core/ProjectionManager.js"></script>
+    <script type="module" src="core/ShaderManager.js"></script>
+    <script type="module" src="core/HypercubeCore.js"></script>
+
+    <!-- Load NEW Modular Sound Engine -->
+    <script type="module" src="sound/base/AudioModuleBase.js"></script>
+    <script type="module" src="sound/presets.js"></script>
+    <script type="module" src="sound/modules/AnalysisModule.js"></script>
+    <script type="module" src="sound/modules/OscillatorModule.js"></script>
+    <script type="module" src="sound/modules/NoiseModule.js"></script>
+    <script type="module" src="sound/modules/FilterModule.js"></script>
+    <script type="module" src="sound/modules/EnvelopeModule.js"></script>
+    <script type="module" src="sound/modules/LFOModule.js"></script>
+    <script type="module" src="sound/modules/DelayModule.js"></script>
+    <script type="module" src="sound/modules/ReverbModule.js"></script>
+    <script type="module" src="sound/modules/VoiceManager.js"></script>
+    <script type="module" src="sound/ParameterBridge.js"></script>
+    <script type="module" src="sound/ModuleRegistry.js"></script>
+    <script type="module" src="sound/AudioEngine.js"></script>
+
+
+    <!-- Load REFACTORED UI Interaction Logic -->
+    <script type="module" src="js/ui-interactions.js"></script>
+
+    <!-- Load UPDATED ENHANCED UI -->
+    <script type="module" src="js/enhanced-ui.js"></script>
+
+    <!-- REMOVED inline script for sidebar toggle - handled by ui-interactions.js -->
+</body>
+</html>

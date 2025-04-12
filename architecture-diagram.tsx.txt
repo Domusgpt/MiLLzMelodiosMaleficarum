@@ -1,0 +1,158 @@
+import React from 'react';
+
+const ArchitectureDiagram = () => {
+  const containerStyle = {
+    padding: '20px',
+    fontFamily: 'system-ui, sans-serif',
+    backgroundColor: '#111',
+    color: '#eee',
+    borderRadius: '8px',
+    width: '100%',
+    overflowX: 'auto'
+  };
+  
+  const diagramStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    minWidth: '900px'
+  };
+  
+  const rowStyle = {
+    display: 'flex',
+    gap: '15px',
+    justifyContent: 'center'
+  };
+  
+  const boxStyle = {
+    padding: '12px',
+    borderRadius: '6px',
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    fontSize: '14px',
+    fontWeight: '500',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+    minWidth: '150px'
+  };
+  
+  const lineStyle = {
+    height: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative'
+  };
+  
+  const labelStyle = {
+    fontSize: '12px',
+    color: '#aaa',
+    marginBottom: '8px',
+    textTransform: 'uppercase',
+    letterSpacing: '1px'
+  };
+
+  // Colors
+  const colors = {
+    core: '#2b1a54',
+    modules: '#1f4068',
+    system: '#734e8e',
+    parameter: '#522e75',
+    io: '#3a506b',
+    util: '#16213e'
+  };
+  
+  // Arrow SVG component
+  const Arrow = ({ direction = 'down', color = '#aaa', bidirectional = false }) => {
+    if (direction === 'down') {
+      return (
+        <div style={{ height: '20px', display: 'flex', justifyContent: 'center', position: 'relative' }}>
+          <div style={{ width: '2px', height: '100%', backgroundColor: color }}></div>
+          <div style={{ position: 'absolute', bottom: '0', width: '0', height: '0', 
+                      borderLeft: '6px solid transparent', 
+                      borderRight: '6px solid transparent', 
+                      borderTop: `8px solid ${color}` }}></div>
+          {bidirectional && (
+            <div style={{ position: 'absolute', top: '0', width: '0', height: '0', 
+                        borderLeft: '6px solid transparent', 
+                        borderRight: '6px solid transparent', 
+                        borderBottom: `8px solid ${color}` }}></div>
+          )}
+        </div>
+      );
+    }
+    return null;
+  };
+  
+  // Connection line between boxes
+  const Connection = ({ bidirectional = false }) => (
+    <div style={lineStyle}>
+      <Arrow bidirectional={bidirectional} />
+    </div>
+  );
+  
+  // Module box component
+  const Module = ({ label, title, color, width = '150px' }) => (
+    <div style={{ ...boxStyle, backgroundColor: color, width }}>
+      {label && <div style={labelStyle}>{label}</div>}
+      <div>{title}</div>
+    </div>
+  );
+
+  return (
+    <div style={containerStyle}>
+      <div style={diagramStyle}>
+        <div style={rowStyle}>
+          <Module label="Core" title="AudioEngine" color={colors.core} width="200px" />
+        </div>
+        
+        <Connection bidirectional={true} />
+        
+        <div style={rowStyle}>
+          <Module label="System" title="ParameterBridge" color={colors.parameter} width="250px" />
+        </div>
+        
+        <Connection bidirectional={true} />
+        
+        <div style={rowStyle}>
+          <Module label="Manager" title="ModuleRegistry" color={colors.system} width="250px" />
+        </div>
+        
+        <Connection bidirectional={true} />
+        
+        <div style={{ ...rowStyle, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Module label="Sound Generator" title="OscillatorModule" color={colors.modules} />
+          <Module label="Sound Processor" title="FilterModule" color={colors.modules} />
+          <Module label="Envelope" title="EnvelopeModule" color={colors.modules} />
+          <Module label="Effects" title="EffectsModule" color={colors.modules} />
+          <Module label="Modulation" title="ModulationModule" color={colors.modules} />
+        </div>
+        
+        <Connection bidirectional={true} />
+        
+        <div style={{ ...rowStyle, justifyContent: 'space-around' }}>
+          <Module label="Analysis" title="AnalysisModule" color={colors.system} />
+          <Module label="Patterns" title="ArpeggiatorModule" color={colors.system} />
+          <Module label="Storage" title="PresetManager" color={colors.system} />
+        </div>
+        
+        <Connection bidirectional={true} />
+        
+        <div style={rowStyle}>
+          <Module label="Compatibility" title="BackwardCompatibilityAdapter" color={colors.util} width="300px" />
+        </div>
+        
+        <Connection bidirectional={true} />
+        
+        <div style={{ ...rowStyle, justifyContent: 'space-around' }}>
+          <Module label="I/O" title="VisualizationInterface" color={colors.io} />
+          <Module label="I/O" title="MidiInterface" color={colors.io} />
+          <Module label="I/O" title="UIInterface" color={colors.io} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ArchitectureDiagram;

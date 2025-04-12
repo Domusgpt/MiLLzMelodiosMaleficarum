@@ -1,0 +1,69 @@
+Okay, here are concise prompts summarizing each of the four future development tracks, suitable for putting on a virtual "canvas" or in separate development tickets:
+
+1. LLM Sound Design Integration
+
+Track: Natural Language Sound Design
+
+Goal: Enable users to describe desired sounds via text input (e.g., "ethereal pad", "punchy bass").
+
+Approach: Implement an API-based workflow. Frontend sends description to a backend, which queries an LLM (e.g., GPT, Claude) using engineered prompts. LLM returns synth parameter JSON. Backend validates/sends JSON to frontend, which applies settings to SoundModule.
+
+Key Challenges/Tasks: Backend setup, LLM API integration & cost management, Robust prompt engineering, JSON validation, Frontend UI for input/feedback, Latency handling.
+
+2. Synthesizer Engine Expansion
+
+Track: Core Synth Enhancements
+
+Goal: Dramatically increase sonic flexibility and sound quality.
+
+Key Features:
+
+Oscillators: Add OSC2 (+ Mix, Detune, Sync), Sub Oscillator, Wavetable support, Noise Generator.
+
+Filters: More types (HP, BP, Notch), dedicated Filter ADSR Envelope.
+
+Modulation: Implement LFOs (multiple, shapes, targets) and a Modulation Matrix.
+
+Effects: Add more built-in effects (Chorus, Phaser, Distortion).
+
+Voicing: Introduce Polyphony & Unison modes.
+
+Interface: Add visual feedback (Scope, Spectrum), improve parameter grouping, add MIDI input.
+
+3. Custom Asset Integration (Images)
+
+Track: User Assets & Personalization
+
+Goal: Allow users to incorporate their own images for visual and sonic purposes.
+
+Primary Uses:
+
+Visualizer Backgrounds/Textures: Load JPEGs/PNGs as WebGL textures (sampler2D) to blend with or replace generated visuals. Modulate texture display with audio.
+
+Wavetable Synthesis: Read image pixel data (e.g., brightness along a line) to create unique oscillator waveforms.
+
+UI Skinning: Use images for custom UI elements (knobs, backgrounds).
+
+Tasks: Image loading/validation, WebGL texture handling, Canvas pixel data processing (for wavetables), UI component updates.
+
+4. Visualizer Evolution & Expansion
+
+Track: Advanced Visualizations
+
+Goal: Explore diverse and more complex visual representations beyond the current geometry/projection system.
+
+Potential Directions:
+
+Mathematical: Different high-D shapes, 3D/4D Fractals, Strange Attractors, Reaction-Diffusion patterns.
+
+Physics-Based: Advanced particle systems (forces, flocking, collisions), Fluid simulations modulated by audio.
+
+Rendering: Ray Marching (SDFs), Video Feedback Loops, Advanced Post-Processing (Bloom, DOF).
+
+Data-Driven: Direct audio spectrum/waveform visualizations (e.g., terrains), abstract network graphs.
+
+Immersive: WebXR (AR/VR) integration.
+
+Interaction: Allow direct user manipulation of visual parameters (camera, properties).
+
+These should provide clear starting points for planning and tracking the development of each feature area.
